@@ -18,6 +18,7 @@
 - Removed the deprecated `New-VCFNsxEdgeCluster` alias from `New-VCFEdgeCluster`.
 - Refactors `Invoke-VCFCommand` to run commands on SDDC Manager without the need for SSH across PowerShell editions and operating systems.
 - Added `Export-VCFManagementDomainJsonSpec` to export the JSON spec required for bringup from the Planning & Preparation Excel workbook.
+- Enhanced the VCF request headers to include `Content-Type` to ensure REST API calls do not error out
 
 ## v2.4.1
 
