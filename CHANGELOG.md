@@ -19,6 +19,7 @@
 - Refactors `Invoke-VCFCommand` to run commands on SDDC Manager without the need for SSH across PowerShell editions and operating systems.
 - Added `Export-VCFManagementDomainJsonSpec` to export the JSON spec required for bringup from the Planning & Preparation Excel workbook.
 - Enhanced the VCF request headers to include `Content-Type` to ensure REST API calls do not error out
+- Enhanced `ResponseException` function to accept optional `-Body` parameter to include the JSON payload for ease of debugging
 
 ## v2.4.1
 

@@ -6135,12 +6135,16 @@ Export-ModuleMember -Function Invoke-VCFCommand
 
 Function ResponseException {
     Param (
-        [Parameter (Mandatory = $true)] [PSObject]$object
+        [Parameter (Mandatory = $true)] [PSObject]$object,
+        [Parameter (Mandatory = $false)] [PSObject]$body
     )
 
     Write-Host "Script File:       $($object.InvocationInfo.ScriptName) Line: $($object.InvocationInfo.ScriptLineNumber)" -ForegroundColor Red
     Write-Host "Relevant Command:  $($object.InvocationInfo.Line.trim())" -ForegroundColor Red
     Write-Host "Target Uri:         $($object.TargetObject.RequestUri.AbsoluteUri)" -ForegroundColor Red
+    if($body -ne $null -and $body -ne "") {
+        Write-Host "Target Payload:         $body" -ForegroundColor Red
+    }
     Write-Host "Exception Message: $($object.Exception.Message)" -ForegroundColor Red
     Write-Host "Error Message:     $($object.ErrorDetails.Message)" -ForegroundColor Red
 }
