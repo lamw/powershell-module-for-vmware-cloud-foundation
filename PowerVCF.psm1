@@ -6147,6 +6147,7 @@ Function ResponseException {
 
 Function createHeader {
     $Global:headers = @{"Accept" = "application/json" }
+    $Global:headers = @{"Content-Type" = "application/json" }
     $Global:headers.Add("Authorization", "Bearer $accessToken")
 }
 
