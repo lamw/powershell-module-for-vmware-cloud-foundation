@@ -179,6 +179,13 @@ nav:
     - documentation/functions/clusters/New-VCFCluster.md
     - documentation/functions/clusters/Remove-VCFCluster.md
     - documentation/functions/clusters/Set-VCFCluster.md
+  - Compliance:
+    - documentation/functions/compliance/Get-VCFComplianceConfiguration.md
+    - documentation/functions/compliance/Get-VCFComplianceStandard.md
+    - documentation/functions/compliance/New-VCFCompliance.md
+    - documentation/functions/compliance/Get-VCFComplianceTask.md
+    - documentation/functions/compliance/Get-VCFCompliance.md
+    - documentation/functions/compliance/Get-VCFComplianceHistory.md
   - Credentials:
     - documentation/functions/credentials/Get-VCFCredential.md
     - documentation/functions/credentials/Get-VCFCredentialExpiry.md

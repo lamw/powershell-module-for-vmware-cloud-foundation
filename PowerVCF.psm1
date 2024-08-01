@@ -5950,6 +5950,253 @@ Export-ModuleMember -Function Update-VCFIdentityProvider
 
 #EndRegion APIs for managing Identity Providers
 
+Function Get-VCFComplianceConfiguration {
+    <#
+        .SYNOPSIS
+        Retrieves the list of all VCF compliance configurations along with their applicable resource types and versions
+
+        .DESCRIPTION
+        The Get-VCFComplianceConfiguration cmdlet retrieves the list of all VCF compliance configurations along with their applicable resource types and versions
+
+        .EXAMPLE
+        Get-VCFComplianceConfiguration
+        This example shows how to retrieve a list of all VCF compliance configurations
+    #>
+
+    Try {
+        if ((Get-VCFManager -version) -ge '5.2.0') {
+            createHeader # Set the Accept and Authorization headers.
+            checkVCFToken # Validate the access token and refresh, if necessary.
+            $uri = "https://$sddcManager/v1/compliance-configurations"
+            $response = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
+            Return ($response).elements
+
+        } else {
+            Write-Warning "$msgVcfApiNotSupported $(Get-VCFManager -version)"
+        }
+    } Catch {
+        ResponseException -Object $_
+    }
+}
+Export-ModuleMember -Function Get-VCFComplianceConfiguration
+
+Function Get-VCFComplianceStandard {
+    <#
+        .SYNOPSIS
+        Retrieves the list of all VCF compliance standards and versions that are supported
+
+        .DESCRIPTION
+        The Get-VCFComplianceStandard cmdlet retrieves the the list of all VCF compliance standards and versions that are supported.
+
+        .EXAMPLE
+        Get-VCFComplianceStandard
+        This example shows how to retrieve a list of all VCF compliance standards and versions
+    #>
+
+    Try {
+        if ((Get-VCFManager -version) -ge '5.2.0') {
+            createHeader # Set the Accept and Authorization headers.
+            checkVCFToken # Validate the access token and refresh, if necessary.
+            $uri = "https://$sddcManager/v1/compliance-standards"
+            $response = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
+            Return ($response).elements
+
+        } else {
+            Write-Warning "$msgVcfApiNotSupported $(Get-VCFManager -version)"
+        }
+    } Catch {
+        ResponseException -Object $_
+    }
+}
+Export-ModuleMember -Function Get-VCFComplianceStandard
+
+Function Get-VCFComplianceHistory {
+    <#
+        .SYNOPSIS
+        Retrieves the history for all VCF compliance audits that have been performed
+
+        .DESCRIPTION
+        The Get-VCFComplianceHistory cmdlet retrieves the history for all VCF compliance audits that have been performed
+
+        .EXAMPLE
+        Get-VCFIdentityProvider
+        This example shows how to retrieve the history for all compliance audits that have been performed
+
+        .EXAMPLE
+        Get-VCFComplianceHistory
+    #>
+
+    Try {
+        if ((Get-VCFManager -version) -ge '5.2.0') {
+            createHeader # Set the Accept and Authorization headers.
+            checkVCFToken # Validate the access token and refresh, if necessary.
+            $uri = "https://$sddcManager/v1/compliance-audits"
+            $response = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
+            Return ($response).elements
+
+        } else {
+            Write-Warning "$msgVcfApiNotSupported $(Get-VCFManager -version)"
+        }
+    } Catch {
+        ResponseException -Object $_
+    }
+}
+Export-ModuleMember -Function Get-VCFComplianceHistory
+
+Function New-VCFCompliance {
+    <#
+        .SYNOPSIS
+        Performs a new VCF compliance audit
+
+        .DESCRIPTION
+        The Get-VCFIdentityProvider cmdlet retrieves the history for all compliance audits
+
+        .EXAMPLE
+        New-VCFCompliance
+        This example shows how to perform a new VCF compliance audit
+
+        .EXAMPLE
+        New-VCFCompliance -ResourceType "SDDC_MANAGER" -StandardType "PCI" -StandardVersion "4.0"
+
+        .PARAMETER ResourceType
+        Resource type for the compliance audit. Please use Get-VCFComplianceConfiguration to see available options
+
+        .PARAMETER StandardType
+        Compliance type for the compliance audit. Please use Get-VCFComplianceStandard to see available options
+
+        .PARAMETER StandardVersion
+        Compliance version for the compliance audit. Please use Get-VCFComplianceStandard to see available options
+
+        .PARAMETER WorkloadDomainName
+        Name of a VCF Management or Workload Domain
+    #>
+    Param (
+        [Parameter (Mandatory = $true)] [ValidateSet("SDDC_MANAGER")] [String]$ResourceType="SDDC_MANAGER",
+        [Parameter (Mandatory = $true)] [String]$StandardType,
+        [Parameter (Mandatory = $true)] [String]$StandardVersion,
+        [Parameter (Mandatory = $true)] [String]$WorkloadDomainName
+    )
+
+    $vcfWorkloadDomainDetails = Get-VCFWorkloadDomain -Name $WorkloadDomainName
+
+    Try {
+        if ((Get-VCFManager -version) -ge '5.2.0') {
+            createHeader # Set the Accept and Authorization headers.
+            checkVCFToken # Validate the access token and refresh, if necessary.
+            $uri = "https://$sddcManager/v1/domains/$($vcfWorkloadDomainDetails.id)/compliance-audits"
+
+            $spec = [Ordered]@{
+                "standardType" = $StandardType
+                "standardVersion" = $StandardVersion
+                "complianceResourcesConfigurationSpec" = @(
+                    @{
+                        "resources" = @(
+                            @{
+                                "resourceType" = $ResourceType
+                            }
+                        )
+                    }
+                )
+            }
+
+            $body = $spec | ConvertTo-Json -Depth 4
+
+            $response = Invoke-RestMethod -Method POST -Uri $uri -Headers $headers -Body $body
+            Return $response
+
+        } else {
+            Write-Warning "$msgVcfApiNotSupported $(Get-VCFManager -version)"
+        }
+    } Catch {
+        ResponseException -Object $_ -body $body
+    }
+}
+Export-ModuleMember -Function New-VCFCompliance
+
+Function Get-VCFComplianceTask {
+    <#
+        .SYNOPSIS
+        Retrieves the VCF compliance audit id and progress using the task Id returned from the New-VCFCompliance operation
+
+        .DESCRIPTION
+        The Get-VCFComplianceTask cmdlet retrieves the VCF compliance audit id and progress using the task Id returned from the New-VCFCompliance operation
+
+        .EXAMPLE
+        Get-VCFComplianceTask
+        This example shows how to retrieve retrieve the VCF compliance audit id and progress using the task Id returned from the New-VCFCompliance operation
+
+        .EXAMPLE
+        Get-VCFCompliance -WorkloadDomainName -ComplianceTaskId
+
+        .PARAMETER WorkloadDomainName
+        Name of a VCF Management or Workload Domain
+
+        .PARAMETER ComplianceTaskId
+        Compliance task returned from New-VCFCompliance
+    #>
+    Param (
+        [Parameter (Mandatory = $true)] [String]$WorkloadDomainName,
+        [Parameter (Mandatory = $true)] [String]$ComplianceTaskId
+    )
+
+    $vcfWorkloadDomainDetails = Get-VCFWorkloadDomain -Name $WorkloadDomainName
+
+    Try {
+        if ((Get-VCFManager -version) -ge '5.2.0') {
+            createHeader # Set the Accept and Authorization headers.
+            checkVCFToken # Validate the access token and refresh, if necessary.
+            $uri = "https://$sddcManager/v1/domains/$($vcfWorkloadDomainDetails.id)/compliance-audits/tasks/${ComplianceTaskId}"
+            $response = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
+            Return $response
+
+        } else {
+            Write-Warning "$msgVcfApiNotSupported $(Get-VCFManager -version)"
+        }
+    } Catch {
+        ResponseException -Object $_
+    }
+}
+Export-ModuleMember -Function Get-VCFComplianceTask
+
+Function Get-VCFCompliance {
+    <#
+        .SYNOPSIS
+        Retrieves a specific VCF compliance audit result
+
+        .DESCRIPTION
+        The Get-VCFCompliance cmdlet retrieves a specific VCF compliance audit result
+
+        .EXAMPLE
+        Get-VCFCompliance
+        This example shows how to retrieve a specific VCF compliance audit result
+
+        .EXAMPLE
+        Get-VCFCompliance  -ComplianceAuditId "1758e972-8509-4dce-93d9-a303d7c35a41"
+
+        .PARAMETER ComplianceAuditId
+        Compliance task returned from Get-VCFComplianceTask or Get-VCFComplianceHistory
+    #>
+    Param (
+        [Parameter (Mandatory = $true)] [String]$ComplianceAuditId
+    )
+
+    Try {
+        if ((Get-VCFManager -version) -ge '5.2.0') {
+            createHeader # Set the Accept and Authorization headers.
+            checkVCFToken # Validate the access token and refresh, if necessary.
+            $uri = "https://$sddcManager/v1/compliance-audits/${ComplianceAuditId}/compliance-audit-items"
+            $response = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
+            Return ($response).elements
+
+        } else {
+            Write-Warning "$msgVcfApiNotSupported $(Get-VCFManager -version)"
+        }
+    } Catch {
+        ResponseException -Object $_
+    }
+}
+Export-ModuleMember -Function Get-VCFCompliance
+
 #Region APIs for managing Validations (Not Exported)
 
 # The following functions are not exported since they are used internally by the cmdlets that manage the validations.
