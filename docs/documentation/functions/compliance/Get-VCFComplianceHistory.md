@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-Retrieves the history for all VCF compliance audits that have been performed
+Retrieves the history for all compliance audits that have been performed.
 
 ## Syntax
 
@@ -12,7 +12,7 @@ Get-VCFComplianceHistory
 
 ## Description
 
-The `Get-VCFComplianceHistory` cmdlet retrieves the history for all VCF compliance audits that have been performed
+The `Get-VCFComplianceHistory` cmdlet retrieves the history for all compliance audits that have been performed.
 
 ## Examples
 
@@ -50,4 +50,4 @@ numberOfSkippedConfigurations        : 2
 numberOfAuditItems                   : 9
 ```
 
-This example shows how to retrieve the history for all VCF compliance audits that have been performed
+This example shows how to retrieve the history for all compliance audits that have been performed.

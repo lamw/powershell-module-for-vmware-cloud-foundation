@@ -23,7 +23,7 @@ theme:
   logo: assets/images/icon-white.svg
   icon:
     repo: fontawesome/brands/github
-  palette:  
+  palette:
   - media: "(prefers-color-scheme: light)"
     scheme: default
     primary: indigo
@@ -126,7 +126,7 @@ markdown_extensions:
 
 # Navigation
 nav:
-- Getting Started: 
+- Getting Started:
   - index.md
   - Installation: documentation/getting-started/install.md
   - Updating: documentation/getting-started/update.md
@@ -137,7 +137,7 @@ nav:
   - License: license.md
 - Reference:
   - documentation/index.md
-  - Application Virtual Networks: 
+  - Application Virtual Networks:
     - documentation/functions/avns/Add-VCFApplicationVirtualNetwork.md
     - documentation/functions/avns/Get-VCFApplicationVirtualNetwork.md
   - Authentication:
@@ -180,12 +180,12 @@ nav:
     - documentation/functions/clusters/Remove-VCFCluster.md
     - documentation/functions/clusters/Set-VCFCluster.md
   - Compliance:
-    - documentation/functions/compliance/Get-VCFComplianceConfiguration.md
-    - documentation/functions/compliance/Get-VCFComplianceStandard.md
-    - documentation/functions/compliance/New-VCFCompliance.md
-    - documentation/functions/compliance/Get-VCFComplianceTask.md
     - documentation/functions/compliance/Get-VCFCompliance.md
+    - documentation/functions/compliance/Get-VCFComplianceConfiguration.md
     - documentation/functions/compliance/Get-VCFComplianceHistory.md
+    - documentation/functions/compliance/Get-VCFComplianceStandard.md
+    - documentation/functions/compliance/Get-VCFComplianceTask.md
+    - documentation/functions/compliance/New-VCFCompliance.md
   - Credentials:
     - documentation/functions/credentials/Get-VCFCredential.md
     - documentation/functions/credentials/Get-VCFCredentialExpiry.md

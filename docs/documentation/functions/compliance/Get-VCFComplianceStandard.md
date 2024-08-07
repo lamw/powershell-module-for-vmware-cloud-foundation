@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-Retrieves the list of all VCF compliance audit standards and versions that are supported
+Retrieves the list of all compliance audit standards and versions that are supported.
 
 ## Syntax
 
@@ -12,7 +12,7 @@ Get-VCFComplianceConfiguration
 
 ## Description
 
-The `Get-VCFComplianceStandard` cmdlet retrieves the the list of all VCF compliance audit standards and versions that are supported.
+The `Get-VCFComplianceStandard` cmdlet retrieves the the list of all compliance audit standards and versions that are supported.
 
 ## Examples
 
@@ -26,4 +26,4 @@ standardType standardVersions
 PCI          {4.0}
 ```
 
-This example shows how to retrieve a list of all VCF compliance audit standards and versions
+This example shows how to retrieve a list of all compliance audit standards and versions.

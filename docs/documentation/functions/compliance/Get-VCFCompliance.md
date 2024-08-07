@@ -2,27 +2,27 @@
 
 ## Synopsis
 
-Retrieves a specific VCF compliance audit result
+Retrieves a specific compliance audit result.
 
 ## Syntax
 
 ```powershell
-Get-VCFCompliance  [-ComplianceAuditId] <String> [<CommonParameters>]
+Get-VCFCompliance [-complianceAuditId] <String> [<CommonParameters>]
 ```
 
 ## Description
 
-The `Get-VCFCompliance` cmdlet retrieves a specific VCF compliance audit result
+The `Get-VCFCompliance` cmdlet retrieves a specific compliance audit result.
 
 ## Examples
 
 ### Example 1
 
 ```powershell
-Get-VCFCompliance  -ComplianceAuditId "1758e972-8509-4dce-93d9-a303d7c35a41"
+Get-VCFCompliance -complianceAuditId "1758e972-8509-4dce-93d9-a303d7c35a41"
 
 resourceType                         : SDDC_MANAGER
-resourceName                         : sddcm-01.williamlam.com
+resourceName                         : sfo-vcf01.sfo.rainpole.io
 configurationId                      : 1602
 configurationTitle                   : Install Security Patches and updates for SDDC Manager.
 isConfigurationRecommendedByStandard : True
@@ -35,7 +35,7 @@ remediationStep                      : To apply patches and updates to SDDC Mana
 complianceAuditStatus                : SUCCEEDED
 
 resourceType                         : SDDC_MANAGER
-resourceName                         : sddcm-01.williamlam.com
+resourceName                         : sfo-vcf01.sfo.rainpole.io
 configurationId                      : 1601
 configurationTitle                   : SDDC Manager components must use an authoritative time source.
 isConfigurationRecommendedByStandard : True
@@ -48,11 +48,13 @@ remediationStep                      : From the SDDC Manager UI, navigate to Adm
 complianceAuditStatus                : SUCCEEDED
 ```
 
-This example shows how to retrieve a specific VCF compliance audit result
+This example shows how to retrieve a specific compliance audit result.
 
-### -ComplianceAuditId
+## Parameters
 
-Compliance task returned from Get-VCFComplianceTask or Get-VCFComplianceHistory
+### -complianceAuditId
+
+Specified the compliance task returned from `Get-VCFComplianceTask` or `Get-VCFComplianceHistory`.
 
 ```yaml
 Type: String
@@ -65,3 +67,7 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### Common Parameters
+
+This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`, `-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`, `-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

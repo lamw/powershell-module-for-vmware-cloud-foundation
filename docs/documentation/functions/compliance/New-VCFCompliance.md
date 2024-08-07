@@ -2,33 +2,33 @@
 
 ## Synopsis
 
-Performs a new VCF compliance audit
+Performs a new compliance audit.
 
 ## Syntax
 
 ```powershell
-New-VCFCompliance [-ResourceType] <String> [-StandardType] <String> [-StandardVersion] <String> [-WorkloadDomainName] <String>  [<CommonParameters>]
+New-VCFCompliance [-resourceType] <String> [-standardType] <String> [-standardVersion] <String> [-domainName] <String> [<CommonParameters>]
 ```
 
 ## Description
 
-The `New-VCFWorkloadDomain` cmdlet performs a new VCF compliance audit
+The `New-VCFWorkloadDomain` cmdlet performs a new compliance audit.
 
 ## Examples
 
 ### Example 1
 
 ```powershell
-New-VCFCompliance -ResourceType "SDDC_MANAGER" -StandardType "PCI" -StandardVersion "4.0" -WorkloadDomainName "vcf-m01"
+New-VCFCompliance -resourceType "SDDC_MANAGER" -standardType "PCI" -standardVersion "4.0" -domainName "sfo-m01"
 ```
 
-This example shows how to perform a VCF new compliance audit
+This example shows how to perform a new compliance audit.
 
 ## Parameters
 
-### -ResourceType
+### -resourceType
 
-Resource type for the compliance audit. Please use `Get-VCFComplianceConfiguration` to see available options
+Specifies the resource type for the compliance audit. Please use `Get-VCFComplianceConfiguration` to see available options.
 
 ```yaml
 Type: String
@@ -42,25 +42,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -StandardType
+### -standardType
 
-Compliance type for the compliance audit. Please use `Get-VCFComplianceStandard` to see available options
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -StandardVersion
-
-Compliance version for the compliance audit. Please use `Get-VCFComplianceStandard` to see available options
+Specifies the compliance type for the compliance audit. Please use `Get-VCFComplianceStandard` to see available options.
 
 ```yaml
 Type: String
@@ -74,9 +58,25 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WorkloadDomainName
+### -standardVersion
 
-Name of a VCF Management or Workload Domain
+Specifies the compliance version for the compliance audit. Please use `Get-VCFComplianceStandard` to see available options.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -domainName
+
+Specifies the name of the workload domain.
 
 ```yaml
 Type: String
@@ -92,4 +92,4 @@ Accept wildcard characters: False
 
 ### Common Parameters
 
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: `-Debug`, `-ErrorAction`, `-ErrorVariable`, `-InformationAction`, `-InformationVariable`, `-OutVariable`, `-OutBuffer`, `-PipelineVariable`, `-Verbose`, `-WarningAction`, and `-WarningVariable`. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
