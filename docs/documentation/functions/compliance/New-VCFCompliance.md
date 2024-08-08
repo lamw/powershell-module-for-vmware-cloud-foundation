@@ -1,34 +1,34 @@
-# Set-VCFMicrosoftCa
+# New-VCFCompliance
 
 ## Synopsis
 
-Configures Microsoft Certificate Authority integration.
+Performs a new compliance audit.
 
 ## Syntax
 
 ```powershell
-Set-VCFMicrosoftCa [-serverUrl] <String> [-username] <String> [-password] <String> [-templateName] <String> [<CommonParameters>]
+New-VCFCompliance [-resourceType] <String> [-standardType] <String> [-standardVersion] <String> [-domainName] <String> [<CommonParameters>]
 ```
 
 ## Description
 
-The `Set-VCFMicrosoftCa` cmdlet configures Microsoft Certificate Authority integration with SDDC Manager.
+The `New-VCFWorkloadDomain` cmdlet performs a new compliance audit.
 
 ## Examples
 
 ### Example 1
 
 ```powershell
-Set-VCFMicrosoftCa -serverUrl "https://rpl-pki01.rainpole.io/certsrv" -username Administrator -password "VMw@re1!" -templateName VMware
+New-VCFCompliance -resourceType "SDDC_MANAGER" -standardType "PCI" -standardVersion "4.0" -domainName "sfo-m01"
 ```
 
-This example shows how to configure a Microsoft Certificate Authority integration with SDDC Manager.
+This example shows how to perform a new compliance audit.
 
 ## Parameters
 
-### -serverUrl
+### -resourceType
 
-Specifies the HTTPS URL for the Microsoft Certificate Authority.
+Specifies the resource type for the compliance audit. Please use `Get-VCFComplianceConfiguration` to see available options.
 
 ```yaml
 Type: String
@@ -42,9 +42,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -username
+### -standardType
 
-Specifies the username used to authenticate to the Microsoft Certificate Authority.
+Specifies the compliance type for the compliance audit. Please use `Get-VCFComplianceStandard` to see available options.
 
 ```yaml
 Type: String
@@ -52,15 +52,15 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -password
+### -standardVersion
 
-Specifies the password used to authenticate to the Microsoft Certificate Authority.
+Specifies the compliance version for the compliance audit. Please use `Get-VCFComplianceStandard` to see available options.
 
 ```yaml
 Type: String
@@ -68,15 +68,15 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 3
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -templateName
+### -domainName
 
-Specifies the name of the certificate template used on the Microsoft Certificate Authority.
+Specifies the name of the workload domain.
 
 ```yaml
 Type: String
@@ -84,8 +84,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 4
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
